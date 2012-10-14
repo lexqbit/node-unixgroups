@@ -1,0 +1,18 @@
+{
+  "name": "unixgroups",
+  "version": "0.1.0",
+  "description": "Provide bindings for getgroups and initgroups",
+  "author": "Joe Rozner <joe@deadbytes.net>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jrozner/node-unixgroups.git"
+  },
+  "main": "./build/Release/binding.node",
+  "keywords": ["privilege", "permissions", "unix", "groups"],
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  }
+}
