@@ -46,6 +46,7 @@ static Handle<Value> InitGroups(const Arguments& args) {
   bufsize = sysconf(_SC_GETPW_R_SIZE_MAX);
   char buffer[bufsize];
 
+  errno = 0;
   if ((err = getpwnam_r(*pwnam, &pwd, buffer, bufsize, &pwdp)) ||
       pwdp == NULL) {
     if (errno == 0)
@@ -56,6 +57,10 @@ static Handle<Value> InitGroups(const Arguments& args) {
   }
 
   gid = pwd.pw_gid;
+  if (args.Length() > 1 && args[1]->IsTrue()) {
+    if ((err = setgid(gid)) == -1)
+      return ThrowException(ErrnoException(errno, "setgid"));
+  }
 
   if ((err = initgroups(*pwnam, gid)) == -1)
     return ThrowException(ErrnoException(errno, "initgroups"));
