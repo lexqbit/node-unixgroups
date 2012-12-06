@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <grp.h>
 
 using namespace node;
 using namespace v8;
